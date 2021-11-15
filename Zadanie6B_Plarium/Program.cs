@@ -10,29 +10,29 @@ namespace Zadanie6B_Plarium
     {
         static void Main(string[] args)
         {
-
+            //листы в которых храниться информацыя о необходимых классах
             List<People> peoples = new List<People>();
             Dictionary<int, Region> regions = new Dictionary<int, Region>();
             Pogoda wether = new Pogoda();
-
+            //добавление в делегат методов установки начальных значений
             AddStartValue addStartValue;
             addStartValue = AddPeoples;
             addStartValue += AddRegion;
             addStartValue += AddWether;
             #region Обработка нажатия клавиши
-            KeyEvent evnt = new KeyEvent();
+            KeyEvent evnt = new KeyEvent();//событие нажатия клавиши
             evnt.KeyDown += (sender, e) =>
             {
                 switch (e.ch)
                 {
-                    case '1':
+                    case '1'://устанавливаем начальные значения
                         {
                             addStartValue();
                             break;
                         }
                     case '2':
                         {
-                            wether.Notify += DisplayMessage; 
+                            wether.Notify += DisplayMessage; //подписываемся на события вывода(если не подписаться в консоль метод ничего не выведет)
                             try
                             {
                                 wether.GetPogoda(wether, regions[0]);//Вывести сведения о погоде в заданном регионе.
@@ -42,12 +42,12 @@ namespace Zadanie6B_Plarium
                                 Console.WriteLine($" Еще не установлены значения");
                             }
                            
-                            wether.Notify -= DisplayMessage;
+                            wether.Notify -= DisplayMessage;//отписываемся от события
                             break;
                         }
                     case '3':
                         {
-                            wether.Notify += DisplayMessage;
+                            wether.Notify += DisplayMessage;//подписываемся на событие
                             try
                             {
                                 wether.GetData(wether, regions[1], "Снег", 0);// Вывести даты, когда в заданном регионе шел снег и температура была ниже заданной отрицательной.
@@ -57,12 +57,12 @@ namespace Zadanie6B_Plarium
                                 Console.WriteLine($" Еще не установлены значения");
                             }
                            
-                            wether.Notify -= DisplayMessage;
+                            wether.Notify -= DisplayMessage;//отписываемся от события
                             break;
                         }
                     case '4':
                         {
-                            wether.Notify += DisplayMessage;
+                            wether.Notify += DisplayMessage;//подписываемся на событие
                             try
                             {
                                 wether.GetPogoda(wether, "английский");//Вывести информацию о погоде за прошедшую неделю в регионах, жители которых общаются на заданном языке.
@@ -72,12 +72,12 @@ namespace Zadanie6B_Plarium
                                 Console.WriteLine($" Еще не установлены значения");
                             }
                             
-                            wether.Notify -= DisplayMessage;
+                            wether.Notify -= DisplayMessage;//отписываемся от события
                             break;
                         }
                     case '5':
                         {
-                            wether.Notify += DisplayMessage;
+                            wether.Notify += DisplayMessage;//подписываемся на событие
                             try
                             {
                                 wether.GetTemp(wether, 6000, regions);//Вывести среднюю температуру за прошедшую неделю в регионах с площадью больше заданной.
@@ -87,15 +87,27 @@ namespace Zadanie6B_Plarium
                                 Console.WriteLine($" Еще не установлены значения");
                             }
                             
-                            wether.Notify -= DisplayMessage;
+                            wether.Notify -= DisplayMessage;//отписываемся от события
                             break;
                         }
-                    case '0':
+                    case '6'://демонстрация что будет если не подписаться на событие
+                        {
+                            try
+                            {
+                                wether.GetTemp(wether, 6000, regions);//Вывести среднюю температуру за прошедшую неделю в регионах с площадью больше заданной.
+                            }
+                            catch
+                            {
+                                Console.WriteLine($" Еще не установлены значения");
+                            }
+                            break;
+                        }
+                    case '0'://завершение
                         {
                             Console.WriteLine($"Программа завершена");
                             break;
                         }
-                    default:
+                    default://неизвестные значения
                         {
                             Console.WriteLine($"такого значения не предусмотрено");
                             break;
@@ -111,7 +123,7 @@ namespace Zadanie6B_Plarium
                 $"5-Вывести среднюю температуру за прошедшую неделю в регионах с площадью больше заданной\n" +
                 $"0-Выход\n");
             char ch;
-            do
+            do//обработка пока не будет нажат выход(0)
             {
                 Console.Write("Введите комманду: ");
                 ConsoleKeyInfo key;
@@ -153,8 +165,8 @@ namespace Zadanie6B_Plarium
             #endregion
         }
 
-        private static void DisplayMessage(string message) => Console.WriteLine(message);
+        private static void DisplayMessage(string message) => Console.WriteLine(message);//метод для вывода который передаем в делегат события
 
-        delegate void AddStartValue();
+        delegate void AddStartValue();//делегат стартовых значений
     }
 }

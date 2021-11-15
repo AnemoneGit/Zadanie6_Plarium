@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Zadanie6B_Plarium
 {
-    abstract class Region
+    abstract class Region//абстрактный класс регион
     {
-        public string Nazva;
-        public int Plochad;
-        public People people;
+        public string Nazva;//название региона
+        public int Plochad;// площадь региона
+        public People people;// люди которые живут в регионе
 
         public Region(string Name, int plochad, People person)
         {
@@ -19,40 +19,40 @@ namespace Zadanie6B_Plarium
             people = person;
 
         }
-        public abstract string GetInfo();
+        public abstract string GetInfo();//абстрактный метод вывода информации о регионе
 
     }
 
-    class Oblast : Region
+    class Oblast : Region//наследник от Region класс области
     {
         public Oblast(string Name, int plochad, People person) : base(Name, plochad, person)
         {
         }
-        public override string GetInfo()
+        public override string GetInfo()//переопределенный метод для области
         {
             return $"В областе {Nazva} ";
         }
     }
 
-    class Country : Region
+    class Country : Region//наследник от Region класс Страна
     {
         public Country(string Name, int plochad, People person) : base(Name, plochad, person)
         {
         }
 
-        public override string GetInfo()
+        public override string GetInfo()//переопределенный метод для страны
         {
             return $"В стране {Nazva} ";
         }
     }
 
-    class City : Region
+    class City : Region//наследник от Region класс города
     {
         public City(string Name, int plochad, People person) : base(Name, plochad, person)
         {
         }
 
-        public override string GetInfo()
+        public override string GetInfo()//переопределенный метод для города
         {
             return $"В городе {Nazva} ";
         }

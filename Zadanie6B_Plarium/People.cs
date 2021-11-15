@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Zadanie6B_Plarium
 {
-    class People
+    class People//класс людей
     {
-        private string Nazvanie;
-        public string Langue;
+        private string Nazvanie;//национальность
+        public string Langue;//язык общения
         public People(string Name, string langue)
         {
             Nazvanie = Name;
